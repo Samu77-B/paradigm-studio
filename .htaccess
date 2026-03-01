@@ -1,0 +1,118 @@
+# ============================================
+# PARADIGM STUDIO WEBSITE SECURITY CONFIGURATION
+# Enhanced Security .htaccess File
+# ============================================
+
+# 1. STOP CROSS-SITE CONTAMINATION (The "Jumping" Fix)
+# Prevents a script in Site A from using a "Symlink" to read Site B.
+Options -FollowSymLinks
+Options +SymLinksIfOwnerMatch
+
+# 2. DISABLE DIRECTORY BROWSING
+# Prevents hackers from seeing your file structure
+Options -Indexes
+
+# Set default directory index files
+DirectoryIndex index.html index.htm
+
+# 3. PROTECT YOUR CORE CONFIG FILES
+# Blocks access to sensitive configuration and system files
+<FilesMatch "^(\.htaccess|\.htpasswd|\.env|\.git|config\.php|config\.json|php\.ini|\.log|error_log|access_log|\.sql|\.sqlite|\.db)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 4. BLOCK MALICIOUS SCRIPT INJECTIONS (Common Attack Patterns)
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Block script injection attempts in query strings
+    RewriteCond %{QUERY_STRING} (<|%3C).*script.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} GLOBALS(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} _REQUEST(=|\[|\%[0-9A-Z]{0,2}) [OR]
+    RewriteCond %{QUERY_STRING} base64_encode.*\(.*\) [NC,OR]
+    RewriteCond %{QUERY_STRING} (<|%3C).*iframe.*(>|%3E) [NC,OR]
+    RewriteCond %{QUERY_STRING} (javascript:|vbscript:|onload=|onerror=) [NC,OR]
+    RewriteCond %{QUERY_STRING} (boot\.ini|etc/passwd|self/environ) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+    
+    # Block suspicious user agents (but allow common browsers)
+    RewriteCond %{HTTP_USER_AGENT} ^$ [OR]
+    RewriteCond %{HTTP_USER_AGENT} (libwww-perl|wget|python|nikto|scan|clshttp|loader|fetch) [NC]
+    RewriteRule ^(.*)$ - [F,L]
+    
+    # Block access to hidden files (except .well-known for SSL validation)
+    RewriteCond %{REQUEST_FILENAME} -f
+    RewriteRule "(^|/)\." - [F,L]
+    RewriteRule ^\.well-known - [L]
+</IfModule>
+
+# 5. DISABLE SERVER SIGNATURE (Hides server version info)
+ServerSignature Off
+
+# 6. PREVENT ACCESS TO BACKUP AND TEMP FILES
+<FilesMatch "\.(bak|backup|old|tmp|temp|swp|swo|~|#)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 7. BLOCK EXECUTABLE AND SCRIPT FILES (except allowed JS files)
+# This blocks dangerous file types
+<FilesMatch "\.(php|phtml|php3|php4|php5|phps|pl|py|jsp|asp|sh|cgi|exe|dll|bat|cmd|com|pif|scr|vbs|jsf|aspx|jspx)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order deny,allow
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# 8. SECURITY HEADERS
+<IfModule mod_headers.c>
+    # Prevent clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Enable XSS protection
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+    
+    # Remove server information
+    Header unset Server
+    Header unset X-Powered-By
+</IfModule>
+
+# 9. COMPRESSION (Optional - improves performance)
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
+</IfModule>
+
+# 10. CACHING FOR STATIC ASSETS (Optional - improves performance)
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType image/jpg "access plus 1 year"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/svg+xml "access plus 1 year"
+    ExpiresByType image/webp "access plus 1 year"
+    ExpiresByType image/x-icon "access plus 1 year"
+    ExpiresByType video/mp4 "access plus 1 year"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+</IfModule>

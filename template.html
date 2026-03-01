@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Page Template - Paradigm Studio</title>
+    
+    <!-- Include the same CSS from your main page -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&family=Playfair+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Copy all the CSS from your main index.html file here */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background-color: #000000;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Add your page-specific styles here */
+        .page-content {
+            padding: 120px 0 100px;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <!-- Your Page Content -->
+    <main class="page-content">
+        <div class="container">
+            <h1>Your Page Title</h1>
+            <p>Your page content goes here...</p>
+        </div>
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <!-- Component Loader -->
+    <script src="js/components.js"></script>
+    
+    <!-- Your page-specific JavaScript -->
+    <script>
+        // Your page-specific JavaScript code here
+    </script>
+</body>
+</html>
