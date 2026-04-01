@@ -819,6 +819,120 @@
             color: #059669;
         }
 
+        /* Bespoke Ventures */
+        .bespoke-ventures {
+            padding: 100px 0;
+            background: #000000;
+            background-image: radial-gradient(ellipse 85% 55% at 50% -10%, rgba(102, 126, 234, 0.09) 0%, transparent 55%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .bespoke-ventures .ventures-kicker {
+            text-align: center;
+            font-size: 0.75rem;
+            font-weight: 500;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.45);
+            margin-bottom: 1rem;
+        }
+
+        .bespoke-ventures .section-title {
+            margin-bottom: 1.25rem;
+        }
+
+        .bespoke-ventures .ventures-subtitle {
+            text-align: center;
+            max-width: 640px;
+            margin: 0 auto 0.5rem;
+            font-size: 1.05rem;
+            font-weight: 300;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.72);
+        }
+
+        .ventures-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.75rem;
+            margin-top: 3rem;
+        }
+
+        .venture-card {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            padding: 2rem 1.75rem;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                box-shadow 0.45s ease,
+                border-color 0.45s ease,
+                background 0.45s ease;
+        }
+
+        .venture-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.22);
+            box-shadow:
+                0 0 0 1px rgba(246, 14, 27, 0.35),
+                0 24px 48px rgba(0, 0, 0, 0.45),
+                0 0 32px rgba(102, 126, 234, 0.12),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .venture-card h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            color: #ffffff;
+            margin-bottom: 0.35rem;
+            line-height: 1.25;
+        }
+
+        .venture-tagline {
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: #F60E1B;
+            margin-bottom: 1rem;
+        }
+
+        .venture-desc {
+            flex: 1;
+            font-size: 0.95rem;
+            font-weight: 300;
+            line-height: 1.65;
+            color: rgba(255, 255, 255, 0.68);
+            margin-bottom: 1.5rem;
+        }
+
+        .venture-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.35rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+            padding-bottom: 2px;
+            align-self: flex-start;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        .venture-link:hover {
+            color: #F60E1B;
+            border-color: rgba(246, 14, 27, 0.5);
+        }
+
         /* Trusted By Section */
         .trusted-by {
             padding: 80px 0;
@@ -1316,6 +1430,7 @@
             .process-steps,
             .projects-grid,
             .portfolio-grid,
+            .ventures-grid,
             .testimonials-grid {
                 grid-template-columns: 1fr;
             }
@@ -1340,6 +1455,7 @@
 
             .services,
             .process,
+            .bespoke-ventures,
             .portfolio,
             .testimonials,
             .contact {
@@ -1433,6 +1549,35 @@
                     <h3>Launch & Support</h3>
                     <p>We launch your project and provide ongoing support to ensure continued success and growth.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bespoke Ventures -->
+    <section class="bespoke-ventures" id="ventures" aria-labelledby="ventures-heading">
+        <div class="container">
+            <p class="ventures-kicker fade-in fade-in-delay-1">Bespoke Ventures</p>
+            <h2 class="section-title fade-in fade-in-delay-1" id="ventures-heading">Engineered by Paradigm</h2>
+            <p class="ventures-subtitle fade-in fade-in-delay-2">A collection of bespoke digital products, designed to eliminate friction and solve complex global logic.</p>
+            <div class="ventures-grid">
+                <article class="venture-card fade-in fade-in-delay-2">
+                    <h3>UrNextEvent</h3>
+                    <p class="venture-tagline">Ticketing Re-engineered</p>
+                    <p class="venture-desc">The secure, account-free infrastructure for global event access. Zero-friction entry logic for high-pressure venues.</p>
+                    <a href="https://urnextevent.com" class="venture-link" target="_blank" rel="noopener noreferrer">urnextevent.com</a>
+                </article>
+                <article class="venture-card fade-in fade-in-delay-3">
+                    <h3>Salon Synk</h3>
+                    <p class="venture-tagline">Automated Operations</p>
+                    <p class="venture-desc">Streamlining the beauty and wellness industry with intelligent, logic-first scheduling and client management.</p>
+                    <a href="https://salonsynk.com" class="venture-link" target="_blank" rel="noopener noreferrer">salonsynk.com</a>
+                </article>
+                <article class="venture-card fade-in fade-in-delay-4">
+                    <h3>Workplace Roast</h3>
+                    <p class="venture-tagline">Cultural Engagement</p>
+                    <p class="venture-desc">A high-velocity platform for team culture, bridging the gap between digital interaction and real-world connection.</p>
+                    <a href="https://workplaceroast.com" class="venture-link" target="_blank" rel="noopener noreferrer">workplaceroast.com</a>
+                </article>
             </div>
         </div>
     </section>
